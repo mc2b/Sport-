@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Programme Perte de Poids - Objectif -10kg</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    header {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .stat-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .tabs {
+        display: flex;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        flex-wrap: wrap;
+    }
+
+    .tab {
+        flex: 1;
+        padding: 15px 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: bold;
+        min-width: 120px;
+    }
+
+    .tab:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .tab-content {
+        display: block;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .meal-plan {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .meal-card {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 4px solid #28a745;
+    }
+
+    .exercise-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+    }
+
+    .exercise-item {
+        background: linear-gradient(45deg, #FFA726, #FF7043);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .progress-bar {
+        background: #e0e0e0;
+        height: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 10px 0;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #4CAF50, #45a049);
+        width: 0%;
+        transition: width 0.3s ease;
+        border-radius: 10px;
+    }
+
+    .btn {
+        background: linear-gradient(45deg, #4CAF50, #45a049);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+        transition: transform 0.2s;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+    }
+
+    .week-selector {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+    }
+
+    .week-btn {
+        padding: 10px 15px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .week-btn.active {
+        background: #0056b3;
+    }
+
+    .daily-schedule {
+        background: #f1f8ff;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 15px 0;
+        border-left: 4px solid #007bff;
+    }
+
+    .vitamin-section {
+        background: linear-gradient(45deg, #9C27B0, #673AB7);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+    }
+
+    .tracker-input {
+        display: flex;
+        gap: 10px;
+        margin: 15px 0;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .tracker-input input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        flex: 1;
+        min-width: 100px;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+        
+        .tabs {
+            flex-direction: column;
+        }
+        
+        .tab {
+            min-width: auto;
+        }
+        
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-target"></i> Mon Programme Transformation</h1>
+            <p>Objectif: Perdre 10kg de manière saine | 1m85 - 104kg → 94kg</p>
+
+```
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Poids Actuel</h3>
+                <div style="font-size: 2em; color: #ff6b6b;" id="currentWeight">104 kg</div>
+            </div>
+            <div class="stat-card">
+                <h3>Objectif</h3>
+                <div style="font-size: 2em; color: #4ecdc4;">94 kg</div>
+            </div>
+            <div class="stat-card">
+                <h3>Progression</h3>
+                <div style="font-size: 1.5em; color: #45b7d1;" id="progress">0%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <h3>Jours</h3>
+                <div style="font-size: 1.5em; color: #96ceb4;" id="dayCounter">1</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('nutrition')">
+            <i class="fas fa-utensils"></i> Nutrition
+        </button>
+        <button class="tab" onclick="showTab('exercise')">
+            <i class="fas fa-dumbbell"></i> Exercices
+        </button>
+        <button class="tab" onclick="showTab('vitamins')">
+            <i class="fas fa-pills"></i> Vitamines
+        </button>
+        <button class="tab" onclick="showTab('tracking')">
+            <i class="fas fa-chart-line"></i> Suivi
+        </button>
+        <button class="tab" onclick="showTab('planning')">
+            <i class="fas fa-calendar"></i> Planning
+        </button>
+    </div>
+
+    <!-- NUTRITION TAB -->
+    <div id="nutrition" class="tab-content">
+        <h2><i class="fas fa-apple-alt"></i> Plan Nutritionnel - 30 Jours</h2>
+        <p><strong>Objectif calorique:</strong> 1800-2000 kcal/jour (déficit de 500-700 kcal)</p>
+        
+        <div class="week-selector">
+            <button class="week-btn active" onclick="showWeek(1)">Semaine 1</button>
+            <button class="week-btn" onclick="showWeek(2)">Semaine 2</button>
+            <button class="week-btn" onclick="showWeek(3)">Semaine 3</button>
+            <button class="week-btn" onclick="showWeek(4)">Semaine 4</button>
+        </div>
+
+        <div id="week1" class="week-content">
+            <h3>Semaine 1 - Adaptation</h3>
+            <div class="meal-plan">
+                <div class="meal-card">
+                    <h4>🌅 Petit-déjeuner (400-450 kcal)</h4>
+                    <ul>
+                        <li><strong>Lundi:</strong> 2 œufs brouillés + 1 tranche pain complet + 1/2 avocat + thé vert</li>
+                        <li><strong>Mardi:</strong> Porridge avoine (50g) + 1 banane + 1 c.à.s amandes + café</li>
+                        <li><strong>Mercredi:</strong> Yaourt grec (150g) + fruits rouges + 1 c.à.s miel + thé</li>
+                        <li><strong>Jeudi:</strong> Smoothie (épinards, banane, pomme, yaourt grec)</li>
+                        <li><strong>Vendredi:</strong> Omelette (2 œufs) aux légumes + pain complet</li>
+                        <li><strong>Weekend:</strong> Pancakes avoine + fruits frais</li>
+                    </ul>
+                </div>
+                
+                <div class="meal-card">
+                    <h4>🥗 Déjeuner (500-600 kcal)</h4>
+                    <ul>
+                        <li><strong>Lundi:</strong> Salade de quinoa (80g) + poulet grillé (120g) + légumes variés</li>
+                        <li><strong>Mardi:</strong> Saumon (120g) + brocolis vapeur + riz complet (60g cru)</li>
+                        <li><strong>Mercredi:</strong> Salade César légère + blanc de dinde + croûtons maison</li>
+                        <li><strong>Jeudi:</strong> Curry de lentilles + légumes + pain naan complet</li>
+                        <li><strong>Vendredi:</strong> Poisson blanc + ratatouille + quinoa</li>
+                        <li><strong>Weekend:</strong> Bowl Buddha (légumes, protéines, céréales)</li>
+                    </ul>
+                </div>
+                
+                <div class="meal-card">
+                    <h4>🍽️ Dîner (400-500 kcal)</h4>
+                    <ul>
+                        <li><strong>Lundi:</strong> Soupe de légumes + omelette aux fines herbes</li>
+                        <li><strong>Mardi:</strong> Salade de tomates-mozza + blanc de poulet grillé</li>
+                        <li><strong>Mercredi:</strong> Poisson en papillote + légumes verts vapeur</li>
+                        <li><strong>Jeudi:</strong> Salade de pois chiches + légumes croquants</li>
+                        <li><strong>Vendredi:</strong> Crevettes sautées + courgetti + tomates cerises</li>
+                        <li><strong>Weekend:</strong> Tartare de légumes + œuf poché</li>
+                    </ul>
+                </div>
+                
+                <div class="meal-card">
+                    <h4>🥨 Collations (200-300 kcal)</h4>
+                    <ul>
+                        <li>Pomme + 10 amandes</li>
+                        <li>Yaourt grec + baies</li>
+                        <li>Carotte + houmous</li>
+                        <li>Thé vert + 2 carrés chocolat noir</li>
+                        <li>Smoothie vert léger</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXERCISE TAB -->
+    <div id="exercise" class="tab-content">
+        <h2><i class="fas fa-fire"></i> Programme d'Exercices à Domicile</h2>
+        <p><strong>Objectif:</strong> Brûler 300-500 kcal par séance | 5-6 séances/semaine</p>
+        
+        <div class="daily-schedule">
+            <h3>Programme Quotidien (45-60 minutes)</h3>
+            <div class="exercise-list">
+                <div class="exercise-item">
+                    <i class="fas fa-running"></i>
+                    <div>
+                        <strong>Échauffement (10 min)</strong>
+                        <br>Marche sur place + étirements dynamiques
+                    </div>
+                </div>
+                
+                <div class="exercise-item">
+                    <i class="fas fa-fire-flame-curved"></i>
+                    <div>
+                        <strong>HIIT Cardio (20 min)</strong>
+                        <br>30s effort / 30s repos × 20 rounds
+                    </div>
+                </div>
+                
+                <div class="exercise-item">
+                    <i class="fas fa-dumbbell"></i>
+                    <div>
+                        <strong>Renforcement (15 min)</strong>
+                        <br>Exercices au poids du corps
+                    </div>
+                </div>
+                
+                <div class="exercise-item">
+                    <i class="fas fa-leaf"></i>
+                    <div>
+                        <strong>Retour au calme (10 min)</strong>
+                        <br>Étirements + relaxation
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="daily-schedule">
+            <h3>Exercices HIIT (Rotation quotidienne)</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                <div>
+                    <h4>🔥 Jour 1 - Full Body</h4>
+                    <ul>
+                        <li>Jumping Jacks × 30s</li>
+                        <li>Squats × 30s</li>
+                        <li>Burpees × 30s</li>
+                        <li>Mountain Climbers × 30s</li>
+                        <li>Planche × 30s</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>💪 Jour 2 - Haut du corps</h4>
+                    <ul>
+                        <li>Pompes × 30s</li>
+                        <li>Dips sur chaise × 30s</li>
+                        <li>Pike Push-ups × 30s</li>
+                        <li>Planche latérale × 30s</li>
+                        <li>Superman × 30s</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>🦵 Jour 3 - Bas du corps</h4>
+                    <ul>
+                        <li>Squats sautés × 30s</li>
+                        <li>Fentes alternées × 30s</li>
+                        <li>Single leg glute bridge × 30s</li>
+                        <li>Wall sit × 30s</li>
+                        <li>High knees × 30s</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VITAMINS TAB -->
+    <div id="vitamins" class="tab-content">
+        <h2><i class="fas fa-prescription-bottle"></i> Supplémentation Recommandée</h2>
+        
+        <div class="vitamin-section">
+            <h3>💊 Vitamines Essentielles pour la Perte de Poids</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                    <h4>🌟 Vitamine D3</h4>
+                    <p><strong>Dosage:</strong> 2000 UI/jour</p>
+                    <p><strong>Rôle:</strong> Métabolisme, humeur, système immunitaire</p>
+                    <p><strong>Moment:</strong> Avec un repas gras</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                    <h4>⚡ Complexe B</h4>
+                    <p><strong>Dosage:</strong> 1 comprimé/jour</p>
+                    <p><strong>Rôle:</strong> Métabolisme énergétique, système nerveux</p>
+                    <p><strong>Moment:</strong> Le matin avec le petit-déjeuner</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                    <h4>🔥 L-Carnitine</h4>
+                    <p><strong>Dosage:</strong> 2g avant l'entraînement</p>
+                    <p><strong>Rôle:</strong> Oxydation des graisses, énergie</p>
+                    <p><strong>Moment:</strong> 30 min avant l'exercice</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                    <h4>🌿 Magnésium</h4>
+                    <p><strong>Dosage:</strong> 400mg/jour</p>
+                    <p><strong>Rôle:</strong> Récupération musculaire, sommeil</p>
+                    <p><strong>Moment:</strong> Le soir avant le coucher</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                    <h4>💚 Thé Vert (EGCG)</h4>
+                    <p><strong>Dosage:</strong> 500mg/jour</p>
+                    <p><strong>Rôle:</strong> Thermogenèse, antioxydant</p>
+                    <p><strong>Moment:</strong> Entre les repas</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                    <h4>🐟 Oméga-3</h4>
+                    <p><strong>Dosage:</strong> 2g/jour (EPA/DHA)</p>
+                    <p><strong>Rôle:</strong> Anti-inflammatoire, récupération</p>
+                    <p><strong>Moment:</strong> Avec un repas</p>
+                </div>
+            </div>
+            
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-top: 20px;">
+                <h4>⏰ Planning de Supplémentation</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><strong>🌅 Matin (petit-déjeuner):</strong> Vitamine D3 + Complexe B + Oméga-3</li>
+                    <li><strong>🏃 Pré-entraînement:</strong> L-Carnitine + Thé vert</li>
+                    <li><strong>🌙 Soir:</strong> Magnésium + Oméga-3</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRACKING TAB -->
+    <div id="tracking" class="tab-content">
+        <h2><i class="fas fa-chart-bar"></i> Suivi Complet</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div class="stat-card">
+                <h3>📊 Saisie Quotidienne</h3>
+                <div class="tracker-input">
+                    <label>Poids (kg):</label>
+                    <input type="number" id="weightInput" placeholder="104" step="0.1">
+                    <button class="btn" onclick="updateWeight()">Sauvegarder</button>
+                </div>
+                
+                <div class="tracker-input">
+                    <label>Tour de taille (cm):</label>
+                    <input type="number" id="waistInput" placeholder="95">
+                    <button class="btn" onclick="updateWaist()">Sauvegarder</button>
+                </div>
+                
+                <div class="tracker-input">
+                    <label>Énergie (/10):</label>
+                    <input type="number" id="energyInput" min="1" max="10" placeholder="7">
+                    <button class="btn" onclick="updateEnergy()">Noter</button>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>🎯 Objectifs Hebdomadaires</h3>
+                <div style="text-align: left;">
+                    <div style="margin: 10px 0;">
+                        <label>
+                            <input type="checkbox" onchange="updateChecklist()"> Exercices 5x cette semaine
+                        </label>
+                    </div>
+                    <div style="margin: 10px 0;">
+                        <label>
+                            <input type="checkbox" onchange="updateChecklist()"> 8 verres d'eau/jour
+                        </label>
+                    </div>
+                    <div style="margin: 10px 0;">
+                        <label>
+                            <input type="checkbox" onchange="updateChecklist()"> Vitamines tous les jours
+                        </label>
+                    </div>
+                    <div style="margin: 10px 0;">
+                        <label>
+                            <input type="checkbox" onchange="updateChecklist()"> 7-8h de sommeil/nuit
+                        </label>
+                    </div>
+                    <div style="margin: 10px 0;">
+                        <label>
+                            <input type="checkbox" onchange="updateChecklist()"> Plan nutritionnel respecté
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="daily-schedule">
+            <h3>📈 Évolution des Mesures</h3>
+            <div id="measurementHistory" style="max-height: 300px; overflow-y: auto;">
+                <p>Aucune mesure enregistrée. Commencez par saisir vos données!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLANNING TAB -->
+    <div id="planning" class="tab-content">
+        <h2><i class="fas fa-calendar-alt"></i> Planning 30 Jours</h2>
+        
+        <div class="daily-schedule">
+            <h3>🗓️ Routine Quotidienne Recommandée</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 10px;">
+                    <h4>6h30 - Réveil</h4>
+                    <p>🥛 Grand verre d'eau + citron</p>
+                    <p>💊 Vitamines du matin</p>
+                </div>
+                
+                <div style="background: #f3e5f5; padding: 15px; border-radius: 10px;">
+                    <h4>7h00 - Petit-déjeuner</h4>
+                    <p>🥣 Repas selon planning</p>
+                    <p>☕ Thé vert ou café</p>
+                </div>
+                
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 10px;">
+                    <h4>10h00 - Collation</h4>
+                    <p>🍎 Fruit + amandes</p>
+                    <p>💧 Verre d'eau</p>
+                </div>
+                
+                <div style="background: #fff3e0; padding: 15px; border-radius: 10px;">
+                    <h4>12h30 - Déjeuner</h4>
+                    <p>🥗 Repas principal</p>
+                    <p>💧 2 verres d'eau</p>
+                </div>
+                
+                <div style="background: #fce4ec; padding: 15px; border-radius: 10px;">
+                    <h4>16h00 - Collation</h4>
+                    <p>🥤 Thé vert + en-cas léger</p>
+                </div>
+                
+                <div style="background: #e1f5fe; padding: 15px; border-radius: 10px;">
+                    <h4>18h00 - Sport</h4>
+                    <p>🏃‍♂️ Programme d'exercices</p>
+                    <p>⚡ L-Carnitine avant</p>
+                </div>
+                
+                <div style="background: #f1f8e9; padding: 15px; border-radius: 10px;">
+                    <h4>19h30 - Dîner</h4>
+                    <p>🥬 Repas léger</p>
+                    <p>💧 Verre d'eau</p>
+                </div>
+                
+                <div style="background: #e8eaf6; padding: 15px; border-radius: 10px;">
+                    <h4>22h00 - Coucher</h4>
+                    <p>💊 Magnésium</p>
+                    <p>📱 Pas d'écrans</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="daily-schedule">
+            <h3>📅 Répartition Hebdomadaire des Exercices</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                <div style="background: #ffeb3b; padding: 10px; border-radius: 5px; text-align: center;">
+                    <strong>Lundi</strong><br>Full Body HIIT
+                </div>
+                <div style="background: #4caf50; color: white; padding: 10px; border-radius: 5px; text-align: center;">
+                    <strong>Mardi</strong><br>Haut du corps
+                </div>
+                <div style="background: #2196f3; color: white; padding: 10px; border-radius: 5px; text-align: center;">
+                    <strong>Mercredi</strong><br>Bas du corps
+                </div>
+                <div style="background: #ff9800; color: white; padding: 10px; border-radius: 5px; text-align: center;">
+                    <strong>Jeudi</strong><br>Cardio + Core
+                </div>
+                <div style="background: #9c27b0; color: white; padding: 10px; border-radius: 5px; text-align: center;">
+                    <strong>Vendredi</strong><br>Full Body
+                </div>
+                <div style="background: #607d8b; color: white; padding: 10px; border-radius: 5px; text-align: center;">
+                    <strong>Samedi</strong><br>Yoga/Stretching
+                </div>
+                <div style="background: #795548; color: white; padding: 10px; border-radius: 5px; text-align: center;">
+                    <strong>Dimanche</strong><br>Repos actif
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Variables globales
+    let currentWeight = 104;
+    let targetWeight = 94;
+    let startDate = new Date();
+    let measurements = [];
+
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', function() {
+        updateProgress();
+        loadMeasurements();
+    });
+
+    // Fonctions de gestion des onglets (tous visibles maintenant)
+    function showTab(tabName) {
+        // Fonction maintenue pour compatibilité mais tous les onglets restent visibles
+        return;
+    }
+
+    // Fonction pour les semaines de nutrition
+    function showWeek(weekNum) {
+        document.querySelectorAll('.week-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`button[onclick="showWeek(${weekNum})"]`).classList.add('active');
+        
+        // Ici on pourrait ajouter le contenu des autres semaines
+        const weekContent = document.getElementById('week1');
+        weekContent.innerHTML = getWeekContent(weekNum);
+    }
+
+    // Contenu des semaines
+    function getWeekContent(week) {
+        const weeks = {
+            1: `
+                <h3>Semaine 1 - Adaptation</h3>
+                <p>Focus sur l'adaptation du corps au nouveau régime alimentaire.</p>
+            `,
+            2: `
+                <h3>Semaine 2 - Intensification</h3>
+                <div class="meal-plan">
+                    <div class="meal-card">
+                        <h4>🌅 Petit-déjeuner (400-450 kcal)</h4>
+                        <ul>
+                            <li><strong>Lundi:</strong> Smoothie protéiné (whey, banane, épinards, lait amande)</li>
+                            <li><strong>Mardi:</strong> Chia pudding + fruits de saison + noix</li>
+                            <li><strong>Mercredi:</strong> Toast avocat + œuf poché + tomate</li>
+                            <li><strong>Jeudi:</strong> Muesli maison + yaourt grec + baies</li>
+                            <li><strong>Vendredi:</strong> Pancakes protéinés + sirop d'érable léger</li>
+                        </ul>
+                    </div>
+                </div>
+            `,
+            3: `
+                <h3>Semaine 3 - Consolidation</h3>
+                <div class="meal-plan">
+                    <div class="meal-card">
+                        <h4>🥗 Focus légumes et fibres</h4>
+                        <p>Introduction de plus de variété dans les légumes pour éviter la monotonie.</p>
+                    </div>
+                </div>
+            `,
+            4: `
+                <h3>Semaine 4 - Optimisation</h3>
+                <div class="meal-plan">
+                    <div class="meal-card">
+                        <h4>🎯 Affinage final</h4>
+                        <p>Ajustements fins pour maximiser les résultats du premier mois.</p>
+                    </div>
+                </div>
+            `
+        };
+        return weeks[week] || weeks[1];
+    }
+
+    // Fonctions de suivi
+    function updateWeight() {
+        const input = document.getElementById('weightInput');
+        const newWeight = parseFloat(input.value);
+        
+        if (newWeight && newWeight > 0) {
+            currentWeight = newWeight;
+            document.getElementById('currentWeight').textContent = newWeight + ' kg';
+            
+            // Ajouter à l'historique
+            const measurement = {
+                date: new Date().toLocaleDateString('fr-FR'),
+                weight: newWeight,
+                type: 'poids'
+            };
+            measurements.push(measurement);
+            
+            updateProgress();
+            updateMeasurementHistory();
+            input.value = '';
+            
+            alert('Poids mis à jour avec succès ! 💪');
+        }
+    }
+
+    function updateWaist() {
+        const input = document.getElementById('waistInput');
+        const waist = parseFloat(input.value);
+        
+        if (waist && waist > 0) {
+            const measurement = {
+                date: new Date().toLocaleDateString('fr-FR'),
+                waist: waist,
+                type: 'tour_taille'
+            };
+            measurements.push(measurement);
+            
+            updateMeasurementHistory();
+            input.value = '';
+            
+            alert('Tour de taille enregistré ! 📏');
+        }
+    }
+
+    function updateEnergy() {
+        const input = document.getElementById('energyInput');
+        const energy = parseInt(input.value);
+        
+        if (energy >= 1 && energy <= 10) {
+            const measurement = {
+                date: new Date().toLocaleDateString('fr-FR'),
+                energy: energy,
+                type: 'energie'
+            };
+            measurements.push(measurement);
+            
+            updateMeasurementHistory();
+            input.value = '';
+            
+            alert(`Niveau d'énergie noté : ${energy}/10 ⚡`);
+        }
+    }
+
+    function updateProgress() {
+        const weightLost = 104 - currentWeight;
+        const totalToLose = 10;
+        const progressPercent = Math.min((weightLost / totalToLose) * 100, 100);
+        
+        document.getElementById('progress').textContent = Math.round(progressPercent) + '%';
+        document.getElementById('progressBar').style.width = progressPercent + '%';
+        
+        // Calcul des jours
+        const today = new Date();
+        const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
+        document.getElementById('dayCounter').textContent = daysPassed;
+    }
+
+    function updateChecklist() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+        const total = checkboxes.length;
+        
+        console.log(`Objectifs complétés: ${checked}/${total}`);
+    }
+
+    function updateMeasurementHistory() {
+        const historyDiv = document.getElementById('measurementHistory');
+        
+        if (measurements.length === 0) {
+            historyDiv.innerHTML = '<p>Aucune mesure enregistrée. Commencez par saisir vos données!</p>';
+            return;
+        }
+        
+        let html = '<h4>📊 Historique des mesures</h4>';
+        
+        // Afficher les 10 dernières mesures
+        const recentMeasurements = measurements.slice(-10).reverse();
+        
+        recentMeasurements.forEach(m => {
+            let content = '';
+            if (m.weight) content = `Poids: ${m.weight}kg`;
+            if (m.waist) content = `Tour de taille: ${m.waist}cm`;
+            if (m.energy) content = `Énergie: ${m.energy}/10`;
+            
+            html += `<div style="padding: 8px; margin: 5px 0; background: #f8f9fa; border-radius: 5px; border-left: 3px solid #007bff;">
+                <strong>${m.date}</strong> - ${content}
+            </div>`;
+        });
+        
+        historyDiv.innerHTML = html;
+    }
+
+    function loadMeasurements() {
+        // Simulation de données initiales
+        measurements = [
+            {date: new Date().toLocaleDateString('fr-FR'), weight: 104, type: 'poids'}
+        ];
+        updateMeasurementHistory();
+    }
+
+    // Animation au scroll
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.stat-card, .meal-card, .exercise-item');
+        
+        elements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                el.style.animation = 'fadeIn 0.6s ease-out';
+            }
+        });
+    }
+
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // Message de motivation quotidien
+    function getDailyMotivation() {
+        const messages = [
+            "Chaque jour est un nouveau départ ! 💪",
+            "La constance mène au succès ! 🎯",
+            "Votre corps vous remercie pour ces efforts ! 🌟",
+            "Un pas de plus vers votre objectif ! 🚀",
+            "La transformation commence maintenant ! ✨"
+        ];
+        
+        const today = new Date().getDay();
+        return messages[today % messages.length];
+    }
+
+    // Afficher un message de motivation
+    setTimeout(() => {
+        console.log("💡 " + getDailyMotivation());
+    }, 2000);
+</script>
+```
+
+</body>
+</html>
